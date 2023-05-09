@@ -1,59 +1,17 @@
 class Solution {
-private:
-    int BASE = 1000000;
 public:
-    int repeatedStringMatch(string A, string B)
-    {
-        if(A == B)
-            return 1;
-        int count = 1;
-        string source = A;
-        while(source.size() < B.size())
-        {
-            count++;
-            source+=A;
+    int repeatedStringMatch(string a, string b) {
+        //here concatinate a with a until a.length()>=a & check if b is substring or not if yes return cnt we repeated a else add a one more time because b[0] is present in a in 0...n-1 index range, if b[0] is present at a[n-1] there is chance of getting b with adding one more time
+        string org=a;
+        while(a.length()<b.length()){
+            a+=org;
         }
-        if(source == B) 
-            return count;
-        if(Rabin_Karp(source,B) != -1) 
-            return count;
-        if(Rabin_Karp(source+A,B) != -1) 
-            return count+1;
-        return -1;
-    }
-    
-    int Rabin_Karp(string source, string target)
-    {
-        if(source == "" || target == "") 
-            return -1;
-        int m = target.size();
-        int power = 1;
-        for(int i = 0;i<m;i++)
-        {
-            power = (power*31)%BASE;
-        }
-        int targetCode = 0;
-        for(int i = 0;i<m;i++)
-        {
-            targetCode = (targetCode*31+target[i])%BASE;
-        }
-        int hashCode = 0;
-        for(int i = 0;i<source.size();i++)
-        {
-            hashCode = (hashCode*31 + source[i])%BASE;
-            if(i<m-1) continue;
-            if(i>=m)
-            {
-                hashCode = (hashCode-source[i-m]*power)%BASE;
-            }
-            if(hashCode<0)
-                hashCode+=BASE;
-            if(hashCode == targetCode)
-            {
-                if(source.substr(i-m+1,m) == target)
-                    return i-m+1;
-            }
-        }
-        return -1;
+        if(a.find(b)!=string::npos)
+            return a.length()/org.length();
+        a+=org;
+        if(a.find(b)!=string::npos)
+            return a.length()/org.length();
+        return -1;    
+        
     }
 };
