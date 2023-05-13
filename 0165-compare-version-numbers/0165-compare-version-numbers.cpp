@@ -29,7 +29,8 @@ public:
             // Compair sum1 and sum2
             if(sum1 > sum2){
                 return 1;
-            }else if(sum1 < sum2){
+            }
+            else if(sum1 < sum2){
                 return -1;
             }
             
