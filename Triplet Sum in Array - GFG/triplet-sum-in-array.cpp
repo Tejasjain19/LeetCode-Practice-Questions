@@ -12,55 +12,51 @@ class Solution{
     {
         sort(nums,nums+n);
         
-          vector<vector<int>> res;
-        
-    
-        
-        for(int i=0; i<n-2 ; i++)  // move for a
-        {
-            if(i==0 || (i>0 && nums[i]!=nums[i-1]))
-            {
-                int low = i+1;
-                int high = n-1;
-                int sum = X-nums[i];
-                
-                while(low<high)
-                {
-                    if(nums[low]+nums[high]==sum)
-                    {
-                        vector<int> temp;
-                      
-                        temp.push_back(nums[low]);
-                        temp.push_back(nums[high]);
-                          temp.push_back(nums[i]);
-                        res.push_back(temp);
-                        
-                        while(low<high && nums[low]==nums[low+1])
-                            low++;
-                        
-                            while(low<high && nums[high]==nums[high-1])
-                           high--;
-                        
-                        low++;
-                        high--;
-                    }
-                    
-                    
-                   else if(nums[low] + nums[high] < sum)
-                    low++;
-                    else
-                    high--;
-                }
-                
-            }
-  
-            
-        }
-        
+         vector<vector<int>> res;
+         
+         for(int i=0; i<n-2; i++)
+         {
+             if(i==0 || (i>0 && nums[i-1]!=nums[i]))
+             {
+                 int l = i+1;
+                 int h = n-1;
+                 int val = X - nums[i];
+                 
+                 while(l<h)
+                 {
+                     
+                     if(nums[l]+nums[h]==val)
+                     {
+                         vector<int> temp;
+                         temp.push_back(nums[l]);
+                         temp.push_back(nums[h]);
+                         temp.push_back(nums[i]);
+                         res.push_back(temp);
+                         
+                         while(l<h && nums[l]!=nums[l+1])
+                         l++;
+                         
+                         while(l<h && nums[h]!=nums[h-1])
+                        h--;
+                         
+                         
+                     }
+                     
+                     if(nums[l]+nums[h]<val)
+                     l++;
+                     
+                     else
+                     h--;
+                     
+                 }
+             }
+         }
+         
        if(res.size()==0)
        return 0;
        
        return 1;
+       
     }
 
 };
