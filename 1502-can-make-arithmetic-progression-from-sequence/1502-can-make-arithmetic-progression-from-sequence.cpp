@@ -8,9 +8,9 @@ public:
         set<int> s;
         
         
-        for(int i=0; i<n-1; i++)
-        {   int diff;
-            diff = arr[i+1]-arr[i];
+        for(int i=1; i<n; i++)
+        {  
+            int diff = arr[i]-arr[i-1];
             s.insert(diff);
         }
         
