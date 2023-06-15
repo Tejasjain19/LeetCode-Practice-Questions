@@ -1,25 +1,46 @@
 class Solution {
 public:
-    string longestPalindrome(string s) {
-        int start = 0, end = 0;
-        for(int i = 0; i < s.length(); i++){
-            int odd = expand(s,i,i);
-            int even = expand(s,i,i+1);
-            int len = max(odd, even);
-            if(len > end-start){
-                //Even len (6)-> 2 start --> i-2, end -> i+3
-                //Odd len (5) -> 2 start i-2, end -> i+2
-                start = i - (len-1)/2;
-                end = i+ len/2;
+    string longestPalindrome(string s)
+    {
+             int mini = INT_MIN;
+        string ans = "";
+        // odd
+        for (int i = 0; i < s.size(); i++)
+        {
+            int start = i, end = i;
+            while (start >= 0 && end < s.size())
+            {
+                if (s[start] != s[end])
+                    break;
+                if (end - start + 1 > mini)
+                {
+                    mini = end - start + 1;
+                    ans = s.substr(start, end - start + 1);
+                }
+                start--;
+                end++;
             }
         }
-        return s.substr(start, end-start+1);
-    }
-    int expand(string s, int left, int right){
-        while(left >= 0 && right <s.length() && s[left] == s[right]){
-            left--;
-            right++;
+        // even
+        for (int i = 0; i < s.size() - 1; i++)
+        {
+            if (s[i] == s[i + 1])
+            {
+                int start = i, end = i+1;
+                while (start >= 0 && end < s.size())
+                {
+                    if (s[start] != s[end])
+                        break;
+                    if (end - start + 1 > mini)
+                    {
+                        mini = end - start + 1;
+                        ans = s.substr(start, end - start + 1);
+                    }
+                    start--;
+                    end++;
+                }
+            }
         }
-        return right-left-1;
+        return ans;
     }
 };
