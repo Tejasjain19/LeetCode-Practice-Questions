@@ -1,52 +1,47 @@
 class Solution {
 public:
-    unordered_map <string , int > dp;
-    
-    
-  int solve(string a , vector<string>& b)
+  int dp[301];
+   int solve(int index , string s ,  set<string> &st )
     {
-        int n = a.size();
         
-        if(n==0)
-            return 1 ;
+        if(index==s.size())
+            return 1;
         
-        if(dp[a]!=0)
-            return dp[a];
+        string temp;
+        
+       if(dp[index]!=-1)
+           return dp[index];
+        
+        for(int j = index; j<s.size(); j++)
+        {
             
-       for(int i=1; i<=n; i++)
-       {
-           int temp=0;
-           string ss = a.substr(0,i);
-         for(int j=0; j<b.size(); j++)
-         {
-             if(ss.compare(b[j])==0)
-             {
-                 temp=1;
-                 break;
-             }
-             
-           
-         }
-         
-           if(temp==1 && solve(a.substr(i,n-i),b)==1)
-                 return dp[a]=1;
-       }
+            temp+=s[j];
             
-             return dp[a]=-1;
+            if(st.find(temp)!=st.end())
+            {
+                if(solve(j+1 , s , st))
+                    return dp[index]=1;
+            }
+            
+        }
         
         
-      }
+        return dp[index]=0;
+        
+    }
     
     
+    bool wordBreak(string s, vector<string>& wordDict) {
     
-    bool wordBreak(string a, vector<string>& b) 
-    {
-       int x = solve(a,b);
-       
-       if(x==1)
-       return true;
+        set<string> st;
         
+        for(auto it : wordDict)
+        {
+            st.insert(it);
+        }
         
-        return false;
+        memset(dp,-1,sizeof(dp));
+       return solve(0 , s , st);
+        
     }
 };
