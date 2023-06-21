@@ -3,49 +3,57 @@ public:
     vector<int> findAnagrams(string s, string p)
     {
     
+   vector<int> ans;
         
-      vector<int> res;
-	   //  int flag=0;
-        unordered_map<char,int> m;
-        for(int i=0;i<p.length();i++)
-        {
-            m[p[i]]++;
-        }
-        int count=m.size();
-        int k=p.length();
-        int i=0;
-        int j=0;
-        while(j<s.length())
-        {
-            if(m.find(s[j])!=m.end())
-            {
-                m[s[j]]--;
-                if(m[s[j]]==0)
-                    count--;
-            }
-            if(j-i+1<k)
-                j++;
-            else if(j-i+1==k)
-            {
-                if(count==0)
-                  res.push_back(i);
-                   
-                if(m.find(s[i])!=m.end())
-                {
-                    m[s[i]]++;
-                    if(m[s[i]]==1)
-                        count++;
-                }
-                i++;
-                j++;
-            }
-        }
-        return res;
+   int n = s.size();
+   int k=p.size();  // window size
         
+   unordered_map<char,int> mp;
         
+   for(auto it : p)
+   {
+       mp[it]++;
+   }
         
+   int i=0,j=0,count=mp.size();
         
+   while(j<n)
+   {
+      
+     mp[s[j]]--;
+     
+     if(mp[s[j]]==0)
+         count--;
+       
+      if(j-i+1<k)
+          j++;
+       
+       else if(j-i+1==k)
+       {
+           if(count==0)
+           {
+               ans.push_back(i);
+           }
+           
+           if(mp.find(s[i])!=mp.end())
+           {
+               mp[s[i]]++;
+           }
+           
+           if(mp[s[i]]==1)
+               count++;
+           
+           i++;
+           
+           j++;
+           
+       }       
+       
+       
+       
+   }
         
+        return ans;
         
         
     }
