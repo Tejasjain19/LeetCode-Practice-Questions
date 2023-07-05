@@ -1,5 +1,9 @@
 class Solution {
 public:
+    
+    // sliding window 
+    
+    
     int longestSubarray(vector<int>& nums) 
     {
     
@@ -7,8 +11,9 @@ public:
         
         int i=0,j=0,cnt=0,ans=0;
         
-     while(j<n)
-     {
+      for(j=0; j<n ; j++)
+        {
+            
           if(nums[j]==0)
                cnt++;
             
@@ -20,9 +25,9 @@ public:
                     i++;
             }
         
-          
+            
             ans=max(ans,j-i);
-             j++;
+             
         }
         
         
