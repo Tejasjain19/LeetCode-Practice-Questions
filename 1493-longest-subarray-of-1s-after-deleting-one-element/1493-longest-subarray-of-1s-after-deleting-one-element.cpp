@@ -7,9 +7,8 @@ public:
         
         int i=0,j=0,cnt=0,ans=0;
         
-      for(j=0; j<n ; j++)
-        {
-            
+     while(j<n)
+     {
           if(nums[j]==0)
                cnt++;
             
@@ -21,9 +20,9 @@ public:
                     i++;
             }
         
-            
+          
             ans=max(ans,j-i);
-             
+             j++;
         }
         
         
