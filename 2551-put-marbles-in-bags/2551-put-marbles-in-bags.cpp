@@ -4,7 +4,7 @@ public:
     {
      int n=weights.size();
         
-        if(k==1 || n==k)
+        if(k==1)
             return 0;
         
         
