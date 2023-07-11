@@ -4,9 +4,9 @@ public:
     {
        int n=nums.size();
         
-       vector<int> nge(n,-1); 
+       vector<int> nge(n,-1);  
         
-       stack<int> st; 
+       stack<int> st;   // stack to implement nge
         
         
        for(int i=2*n-1; i>=0; i--)
@@ -16,11 +16,9 @@ public:
            
            
            if(i<n)
-           {   if(!st.empty())
-               nge[i]=st.top();
-               else
-               nge[i]=-1;
-              
+           {  
+               if(!st.empty())
+               nge[i]=st.top();   
            }
            
            st.push(nums[i%n]);
