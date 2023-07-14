@@ -10,51 +10,33 @@ using namespace std;
 class Solution
 {
     public:
-    //Function to delete middle element of a stack.
-    
-    
-    void deleteMid(stack<int>& st)
-{
-    int n = st.size();
-    stack<int> tempSt;
-    int count = 0;
-     
-    // Put first n/2 element of st in tempSt
-    while (count < n / 2) {
-        int c = st.top();
-        st.pop();
-        tempSt.push(c);
-        count++;
-    }
-       
-    // Delete middle element
-    st.pop();
-       
-    // Put all (n/2) element of tempSt in st
-    while (!tempSt.empty()) {
-        st.push(tempSt.top());
-        tempSt.pop();
-    }
-}
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+  
     void deleteMid(stack<int>&s, int sizeOfStack)
     {
       
-    deleteMid(s);
+       stack<int> st;
+       
+       int count=0;
+       
+       
+       while(count<sizeOfStack/2)
+       {
+           int x = s.top();
+            s.pop();
+           st.push(x);
+            
+           count++;
+       }
+           
+         s.pop();
+         
+         while(!st.empty())
+         {
+             int x=st.top();
+             s.push(x);
+                st.pop();
+         }
+           
        
     }
 };
