@@ -1,73 +1,44 @@
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-class Solution {
+class Solution { 
 public:
-    
-     ListNode* reverseList(ListNode* head) {
-        ListNode *newHead=NULL;
-        
-        while(head!=NULL)
-        {   
-                        
-            ListNode *next=head->next;
-            
-            head->next=newHead;
-            
-            newHead=head;
-            
-            head=next;
-            
-            
+    ListNode* Helper(ListNode* l1, ListNode* l2) {   // approach 2 :-
+        stack<int> stack1, stack2;
+
+        while (l1 != nullptr) {
+            stack1.push(l1->val);
+            l1 = l1->next;
         }
-        
-        return newHead;
+
+        while (l2 != nullptr) {
+            stack2.push(l2->val);
+            l2 = l2->next;
+        }
+
+        ListNode* result = nullptr;
+        int carry = 0;
+
+        while (!stack1.empty() || !stack2.empty() || carry != 0) {
+            int digit1 = !stack1.empty() ? stack1.top() : 0;
+            int digit2 = !stack2.empty() ? stack2.top() : 0;
+
+            int sum = digit1 + digit2 + carry;
+            int digit = sum % 10;
+            carry = sum / 10;
+
+            ListNode* newNode = new ListNode(digit);
+            newNode->next = result;
+            result = newNode;
+
+            if (!stack1.empty())
+                stack1.pop();
+            if (!stack2.empty())
+                stack2.pop();
+        }
+
+        return result;
     }
-    
-    
-    
+
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        l1 = reverseList(l1);
-         l2 = reverseList(l2);
-             ListNode *dummy = new ListNode();
-        ListNode *temp = dummy;
-        
-        
-        int carry=0;
-        
-        while(l1!=NULL || l2!=NULL || carry!=0)
-        {   int sum=0;
-            if(l1!=NULL)
-            {
-                sum+=l1->val;
-                l1=l1->next;
-            }
-             if(l2!=NULL)
-            {
-                sum+=l2->val;
-                l2=l2->next;
-            }
-           
-        
-        
-        sum+=carry;
-        carry=sum/10;
-        
-          ListNode *node = new ListNode(sum%10); 
-        
-          temp->next=node;
-        
-        temp=temp->next;
-        
-        }
-        
-        return reverseList(dummy->next);
+        ListNode* ans = Helper(l1, l2);
+        return ans;
     }
 };
