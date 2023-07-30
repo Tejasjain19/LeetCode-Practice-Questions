@@ -1,6 +1,8 @@
 class Solution {
 public:
     
+    // matrix chain multiplication
+    
     int solve(int i , int j , string &s ,   vector<vector<int>> &dp)
     {
         if(i==j)
