@@ -30,7 +30,7 @@ public:
                     index=i;
                 }
                 
-                else if(ltor==false)
+                else 
                 {
                     index = size-i-1;
                 }
