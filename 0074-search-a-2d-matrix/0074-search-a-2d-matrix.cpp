@@ -1,7 +1,7 @@
 class Solution {
 public:
     bool searchMatrix(vector<vector<int>>& matrix, int target)
-    {
+    {    // an array convert to n * m matrix => a[x] =>matrix[x / m][x % m]; 
         int m = matrix[0].size();
         int n = matrix.size();
         
