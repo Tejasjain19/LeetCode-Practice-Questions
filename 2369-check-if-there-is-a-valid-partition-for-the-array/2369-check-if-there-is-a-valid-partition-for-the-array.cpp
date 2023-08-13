@@ -19,7 +19,7 @@ public:
             }
             
             
-            if(i+2<n && nums[i+1]==nums[i+2])
+            if(i+2<n && nums[i+1]==nums[i+2])  // 3 elements r equal
             {
                 if(solve(nums , i+3 , dp))
                     return dp[i]=true;
@@ -27,7 +27,7 @@ public:
           
         }
         
-        if( i+2 < n && nums[i+2]==nums[i+1]+1 && nums[i+1]==nums[i]+1)
+        if( i+2 < n && nums[i+2]==nums[i+1]+1 && nums[i+1]==nums[i]+1)  // 3rd condition 
         {
             if(solve(nums, i+3 , dp))
                 return dp[i]=true;
