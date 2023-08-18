@@ -1,32 +1,34 @@
 class Solution {
 public:
     
-    int f(int prev_ind , int ind , vector<int>& nums , int n , vector<vector<int>> &dp )
+    int solve(int prev_idx , int idx , vector<int>& nums , int n , vector<vector<int>> &dp )
     {
-        if(ind==n)
+        // base case
+        
+        if(idx==n)
             return 0;
-        if(dp[ind][prev_ind+1]!=-1)
-            return dp[ind][prev_ind+1];
         
-        int len= 0+f(prev_ind , ind+1 , nums , n , dp);
-        
-        if(prev_ind==-1 || nums[ind]>nums[prev_ind])
-       len = max(len , 1 + f(ind , ind+1 , nums , n , dp));
+        if(dp[idx][prev_idx+1]!=-1)
+            return dp[idx][prev_idx+1];
         
         
-        return dp[ind][prev_ind+1] = len ;
+        int len = 0 + solve(prev_idx , idx + 1 , nums , n , dp);  // not take
+        
+        if(prev_idx==-1 || nums[idx]>nums[prev_idx])
+         len = max(len , 1 + solve(idx , idx+1 , nums , n , dp));   // take 
+        
+        return dp[idx][prev_idx+1]=len;
         
     }
+
     
-
+    
     int lengthOfLIS(vector<int>& nums) {
-        int n = nums.size();
+    
+        int n=nums.size();
         
-        vector<vector<int>> dp(n,vector<int>(n+1,-1));
+        vector<vector<int>> dp(n , vector<int>(n+1,-1));
         
-        return f(-1,0,nums,n,dp);
-        
-
-        
+        return solve(-1 , 0 , nums , n , dp);
     }
 };
