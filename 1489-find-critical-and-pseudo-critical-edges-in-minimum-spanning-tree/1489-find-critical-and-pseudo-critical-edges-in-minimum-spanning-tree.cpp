@@ -73,6 +73,6 @@ public:
                 return INT_MAX;
         }
 
-        return weight-1;
+        return weight;
     }
 };
