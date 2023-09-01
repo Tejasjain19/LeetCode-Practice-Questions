@@ -1,22 +1,21 @@
 class Solution {
 public:
-    vector<int> countBits(int n) 
-    {
+    vector<int> countBits(int n) {
         
-        vector<int> temp;
+        // n+1 as we are going to count from 0 to n
+        vector<int> t(n+1);
         
+        // t[0] will be 0 beacuse 0 has count of set bit is 0;
+        t[0] = 0;
         
-        for(int i=0; i<=n; i++)
-        {
-            
-            int ans = __builtin_popcount(i);
-            
-            temp.push_back(ans);
-            
-            
-        }
+        // we can compute current set bit count using previous count
+        // as x/2 in O(1) time
         
-        return temp;
+        // i%2 will be 0 for even number ans 1 for odd number
         
+        for(int i = 1; i<=n; ++i)
+            t[i] = t[i/2] + i%2;
+        
+        return t;
     }
 };
