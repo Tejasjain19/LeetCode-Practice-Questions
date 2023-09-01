@@ -3,7 +3,7 @@ public:
     vector<int> countBits(int n) 
     {
         
-        vector<int> temp(n+1);
+        vector<int> temp;
         
         
         for(int i=0; i<=n; i++)
@@ -11,7 +11,7 @@ public:
             
             int ans = __builtin_popcount(i);
             
-            temp[i]=ans;
+            temp.push_back(ans);
             
             
         }
