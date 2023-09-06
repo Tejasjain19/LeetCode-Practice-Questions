@@ -10,36 +10,72 @@
  */
 class Solution {
 public:
-    vector<ListNode*> splitListToParts(ListNode* head, int k) {
+    
+    int calclen(ListNode* head)
+    {
         int len=0;
-        ListNode*temp=head;
-        while(temp!=NULL){
+        
+        while(head != NULL)
+        {
             len++;
-            temp=temp->next;
+            head=head->next;
         }
-        vector<ListNode*>v(k,NULL);
-        int p=len/k;
-        int extra=len%k;
-        temp=head;
-        int j=0;
-        while(temp!=NULL){
-            ListNode*c=temp;
-            ListNode*dummy=new ListNode(-1);
-            ListNode*curr=dummy;
-            for(int i=0;i<p;i++){
-                curr->next=new ListNode(temp->val);
-                temp=temp->next;
-                curr=curr->next;
+        return len;
+    }
+    
+    
+    vector<ListNode*> splitListToParts(ListNode* head, int k) 
+    {
+     
+        int len = calclen(head);
+        
+        vector<ListNode*> ans;
+        
+        int noofparts = len/k;
+        
+        int extra = len%k;
+        
+        ListNode *prev = NULL;
+        ListNode *curr = head;
+        
+        while(head != NULL)
+        {
+            
+            int part = noofparts;
+            ans.push_back(curr);
+            
+            while(part!=0)
+            {
+                prev = curr;
+                curr = curr->next;
+                part--;
             }
-            if(extra>0){
-                curr->next=new ListNode(temp->val);
-                temp=temp->next;
-                curr=curr->next;
+            
+            if(extra!=0 && curr!=NULL)
+            {
                 extra--;
+                prev = curr;
+                curr = curr->next;
+                
             }
-            v[j]=dummy->next;
-           j++;
+            
+            if(prev!=NULL)
+            {
+                head = curr;
+                prev->next=NULL;
+            }
+            
+            
+            
         }
-        return v;
+        
+        while(ans.size()!=k)
+        {
+            ans.push_back(NULL);
+          
+        }
+        
+        return ans;
+    
     }
 };
