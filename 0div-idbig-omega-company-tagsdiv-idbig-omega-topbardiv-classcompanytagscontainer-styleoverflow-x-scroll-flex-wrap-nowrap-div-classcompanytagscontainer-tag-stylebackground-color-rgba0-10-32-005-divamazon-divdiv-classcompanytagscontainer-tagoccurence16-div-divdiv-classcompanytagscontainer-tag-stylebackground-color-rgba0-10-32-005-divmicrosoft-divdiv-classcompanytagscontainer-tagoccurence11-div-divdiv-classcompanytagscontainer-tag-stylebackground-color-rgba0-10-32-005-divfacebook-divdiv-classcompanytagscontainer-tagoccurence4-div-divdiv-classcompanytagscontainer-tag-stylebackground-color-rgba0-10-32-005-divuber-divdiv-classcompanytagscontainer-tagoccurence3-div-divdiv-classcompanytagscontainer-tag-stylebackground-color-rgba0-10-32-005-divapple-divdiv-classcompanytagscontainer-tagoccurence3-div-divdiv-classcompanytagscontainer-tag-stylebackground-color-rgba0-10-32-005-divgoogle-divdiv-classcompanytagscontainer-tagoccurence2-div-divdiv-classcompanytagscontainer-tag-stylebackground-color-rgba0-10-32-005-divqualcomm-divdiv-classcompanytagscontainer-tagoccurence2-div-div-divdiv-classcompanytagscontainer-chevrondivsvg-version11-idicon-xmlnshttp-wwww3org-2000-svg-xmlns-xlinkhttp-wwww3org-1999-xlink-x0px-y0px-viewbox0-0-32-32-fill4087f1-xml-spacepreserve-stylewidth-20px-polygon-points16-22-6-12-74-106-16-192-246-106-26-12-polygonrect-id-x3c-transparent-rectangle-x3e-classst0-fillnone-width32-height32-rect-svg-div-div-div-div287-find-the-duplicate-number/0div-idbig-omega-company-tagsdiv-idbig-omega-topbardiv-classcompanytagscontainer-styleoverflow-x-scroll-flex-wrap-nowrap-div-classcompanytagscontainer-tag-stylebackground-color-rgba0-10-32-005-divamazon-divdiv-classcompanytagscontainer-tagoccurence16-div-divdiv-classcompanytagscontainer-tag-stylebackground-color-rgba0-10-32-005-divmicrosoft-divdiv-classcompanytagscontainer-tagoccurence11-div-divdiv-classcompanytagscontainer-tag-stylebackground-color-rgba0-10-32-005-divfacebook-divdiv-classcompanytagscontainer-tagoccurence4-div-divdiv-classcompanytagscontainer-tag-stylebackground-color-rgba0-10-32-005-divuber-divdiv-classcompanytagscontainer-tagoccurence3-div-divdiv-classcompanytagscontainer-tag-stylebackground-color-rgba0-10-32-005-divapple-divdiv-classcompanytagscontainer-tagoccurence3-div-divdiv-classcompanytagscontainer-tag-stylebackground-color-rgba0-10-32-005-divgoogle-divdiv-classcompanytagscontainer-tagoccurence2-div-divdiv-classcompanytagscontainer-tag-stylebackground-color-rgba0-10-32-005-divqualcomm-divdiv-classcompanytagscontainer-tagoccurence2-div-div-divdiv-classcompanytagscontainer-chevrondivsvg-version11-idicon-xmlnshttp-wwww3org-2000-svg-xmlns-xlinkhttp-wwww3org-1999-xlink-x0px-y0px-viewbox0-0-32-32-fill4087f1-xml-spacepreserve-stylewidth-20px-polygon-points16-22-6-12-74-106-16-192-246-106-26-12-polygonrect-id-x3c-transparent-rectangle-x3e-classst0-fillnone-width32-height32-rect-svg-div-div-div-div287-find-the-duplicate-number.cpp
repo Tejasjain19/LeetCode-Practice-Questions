@@ -1,23 +1,26 @@
 class Solution {
 public:
-    int findDuplicate(vector<int>& nums) {
-        int n=nums.size(),ans=0;
+    int findDuplicate(vector<int>& nums) {  // hare amd tortoise method 
+        int slow = nums[0];
+        int fast = nums[0];
+          
         
-        unordered_map<int,int> mp;
+        do{
+            slow = nums[slow];
+            fast= nums[nums[fast]];
+            
+        }while(slow!=fast);
         
         
-        for(auto it : nums)
+        fast=nums[0];
+        
+        while(slow!=fast)
         {
-            mp[it]++;
+            slow = nums[slow];
+            fast = nums[fast];
         }
         
+        return slow;
         
-        for(auto it : mp)
-        {
-            if(it.second>1)
-                ans=it.first;
-        }
-        
-        return ans;
     }
 };
