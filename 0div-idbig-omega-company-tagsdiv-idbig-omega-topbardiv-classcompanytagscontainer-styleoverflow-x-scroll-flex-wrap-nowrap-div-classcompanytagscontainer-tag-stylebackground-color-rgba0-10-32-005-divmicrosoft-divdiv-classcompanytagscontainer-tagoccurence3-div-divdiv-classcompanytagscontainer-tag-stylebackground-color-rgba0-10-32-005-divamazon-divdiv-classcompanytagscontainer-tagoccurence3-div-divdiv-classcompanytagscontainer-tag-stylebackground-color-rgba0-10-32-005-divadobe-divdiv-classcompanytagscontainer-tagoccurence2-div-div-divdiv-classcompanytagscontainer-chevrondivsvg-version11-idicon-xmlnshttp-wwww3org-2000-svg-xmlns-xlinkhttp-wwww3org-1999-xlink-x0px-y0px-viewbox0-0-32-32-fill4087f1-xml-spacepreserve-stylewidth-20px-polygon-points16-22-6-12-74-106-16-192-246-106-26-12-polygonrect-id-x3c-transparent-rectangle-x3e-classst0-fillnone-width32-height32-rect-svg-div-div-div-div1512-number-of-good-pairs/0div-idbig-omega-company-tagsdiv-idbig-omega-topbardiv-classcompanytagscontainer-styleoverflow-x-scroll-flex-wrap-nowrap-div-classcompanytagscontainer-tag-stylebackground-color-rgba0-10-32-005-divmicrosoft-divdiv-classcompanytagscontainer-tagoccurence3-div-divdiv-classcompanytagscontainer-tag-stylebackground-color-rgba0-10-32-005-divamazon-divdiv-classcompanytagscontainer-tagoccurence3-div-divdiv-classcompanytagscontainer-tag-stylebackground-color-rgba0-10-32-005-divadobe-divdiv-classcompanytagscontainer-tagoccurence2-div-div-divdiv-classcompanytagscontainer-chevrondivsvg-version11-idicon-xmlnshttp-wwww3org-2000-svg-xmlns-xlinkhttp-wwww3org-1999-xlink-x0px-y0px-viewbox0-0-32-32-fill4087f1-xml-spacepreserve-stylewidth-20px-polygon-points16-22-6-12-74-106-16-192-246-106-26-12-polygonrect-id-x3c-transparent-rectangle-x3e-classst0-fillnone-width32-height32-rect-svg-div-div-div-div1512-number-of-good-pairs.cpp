@@ -5,16 +5,20 @@ public:
     
         int n=nums.size(),cnt=0;
         
-        for(int i=0; i<n; i++)
+      unordered_map<int,int> mp;
+        
+      for(auto it : nums)
+      {
+          mp[it]++;
+      }
+        
+      
+        for(auto it : mp)
         {
-            for(int j=i+1; j<n; j++)
-            {
-                if(nums[i]==nums[j])
-                    cnt++;
-            }
+            cnt+=(it.second * (it.second-1)) / 2;
         }
         
-        return cnt;
         
+      return cnt;
     }
 };
