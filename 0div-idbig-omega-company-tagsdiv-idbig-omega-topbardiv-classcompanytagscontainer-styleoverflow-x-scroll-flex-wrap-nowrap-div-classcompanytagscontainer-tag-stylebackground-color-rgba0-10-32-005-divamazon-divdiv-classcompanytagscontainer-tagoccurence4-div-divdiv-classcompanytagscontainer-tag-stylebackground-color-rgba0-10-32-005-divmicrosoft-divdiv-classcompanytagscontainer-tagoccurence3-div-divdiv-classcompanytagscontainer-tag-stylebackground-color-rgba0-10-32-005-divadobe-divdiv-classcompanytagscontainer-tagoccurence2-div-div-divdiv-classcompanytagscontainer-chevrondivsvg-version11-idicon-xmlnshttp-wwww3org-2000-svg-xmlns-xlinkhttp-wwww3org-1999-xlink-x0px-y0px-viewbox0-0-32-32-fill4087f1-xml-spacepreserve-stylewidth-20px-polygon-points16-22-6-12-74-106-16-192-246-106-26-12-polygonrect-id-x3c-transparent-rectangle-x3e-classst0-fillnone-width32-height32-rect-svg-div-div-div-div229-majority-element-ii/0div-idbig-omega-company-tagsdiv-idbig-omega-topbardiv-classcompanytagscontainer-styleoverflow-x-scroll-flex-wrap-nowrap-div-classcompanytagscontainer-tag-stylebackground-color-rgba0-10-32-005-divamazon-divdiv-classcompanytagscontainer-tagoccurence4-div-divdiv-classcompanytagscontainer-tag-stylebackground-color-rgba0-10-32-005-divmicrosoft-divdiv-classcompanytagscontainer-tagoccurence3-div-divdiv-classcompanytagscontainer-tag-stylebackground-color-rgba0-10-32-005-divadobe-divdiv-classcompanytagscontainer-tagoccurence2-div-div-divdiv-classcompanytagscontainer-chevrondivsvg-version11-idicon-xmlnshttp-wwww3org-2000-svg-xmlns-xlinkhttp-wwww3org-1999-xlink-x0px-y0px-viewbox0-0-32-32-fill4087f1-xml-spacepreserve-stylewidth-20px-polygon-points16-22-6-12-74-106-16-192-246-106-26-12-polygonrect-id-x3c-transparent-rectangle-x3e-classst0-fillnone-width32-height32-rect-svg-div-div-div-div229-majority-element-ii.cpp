@@ -1,29 +1,64 @@
 class Solution {
 public:
-    vector<int> majorityElement(vector<int>& nums) 
+    vector<int> majorityElement(vector<int>& v) 
     {
-      unordered_map<int,int> mp;
-        int n=nums.size();
-       vector<int> ans;
+    
+        int n=v.size();
         
-    for(auto it : nums)
-    {
-        mp[it]++;
+        int el1,el2,cnt1=0,cnt2=0;
+        
+        
+        vector<int> ans;
+        
+        for(int i=0; i<n; i++)
+        {
+            
+            if(cnt1==0 && el2!=v[i])
+            {
+                cnt1=1;
+                el1= v[i];
+            }
+            
+           else if(cnt2==0 && el1!=v[i])
+            {
+                cnt2=1;
+                el2= v[i];
+            }
+            
+            else if(v[i]==el1)
+            {
+                cnt1++;
+            }
+            
+              else if(v[i]==el2)
+            {
+                cnt2++;
+            }
+            
+            else
+            {
+                cnt1--;
+                cnt2--;
+            }
+            
+            
+        }
+        
+       vector<int> ls; // list of answers
+
+    // Manually check if the stored elements in
+    // el1 and el2 are the majority elements:
+    cnt1 = 0, cnt2 = 0;
+    for (int i = 0; i < n; i++) {
+        if (v[i] == el1) cnt1++;
+        if (v[i] == el2) cnt2++;
     }
+
+    int mini = int(n / 3) + 1;
+    if (cnt1 >= mini) ls.push_back(el1);
+    if (cnt2 >= mini) ls.push_back(el2);
         
-    for(auto it : mp)
-    {
-        if(it.second>n/3)
-            ans.push_back(it.first);
-    }
-        
-        
-        
-        return ans;
-        
-        
-        
-        
+        return ls;
         
     }
 };
