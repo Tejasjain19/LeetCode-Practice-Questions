@@ -14,6 +14,6 @@ public:
             }
             res += j - i ;
         }
-        return res;
+        return res+1;
     }
 };
