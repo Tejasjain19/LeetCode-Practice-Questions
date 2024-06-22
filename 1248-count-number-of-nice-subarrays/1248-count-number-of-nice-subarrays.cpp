@@ -19,9 +19,9 @@ public:
                 i++;
             }
 
-            subArrays += j - i ; 
+            subArrays += j - i -1; 
             j++;
         }
-        return subArrays;
+        return subArrays+1;
     }
 };
